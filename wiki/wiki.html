@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="stylesheet.css">
+        <title>競プロメモ</title>
+    </head>
+
+    <body>
+        <header>
+            <h1>競プロメモ</h1>
+        </header>
+        <nav class = "toc-001">
+            <h2>目次</h2>
+            <ul>
+                <li><a href=#C++>C++メモ</a></li>
+                <li><a href=#bis>二分探索</a></li>
+                <li><a href=#dp>動的計画法</a></li>
+                <li><a href=#dict>連想配列</a></li>
+                <li><a href=#bit>bit全探索</a></li>
+                <li><a href=#bfs>幅優先探索</a></li>
+            </ul>
+        </nav>
+
+        <section id="C++">
+            <h2>C++メモ</h2>
+            <nav class = "toc-002">
+                <h3>目次</h3>
+                <ul>
+                    <li><a href=#vector>vector</a></li>
+                    <li><a href=#set>set</a></li>
+                    <li><a href=#map>map</a></li>
+                    <li><a href=#num>数値型</a></li>
+                    <li><a href=#string>文字列型</a></li>
+                    <li><a href=#stack>stack</a></li>
+                    <li><a href=#queue>queue</a></li>
+                    <li><a href=#priority_queue>priority_queue</a></li>
+                    <li><a href=#lower_bound>lower_bound</a></li>
+                </ul>
+            </nav>
+            <section id="vector">
+                <h3>vector</h3>
+                <p>sort(vec.begin(), vec.end()) ...配列変数vecをソートする</p>
+                <p>reverse(vec.begin(), vec.end()) ...配列変数vecの要素の並びを逆にする</p>
+                <p>max_element(vec.begin(), vec.end()) ...配列変数vecの最大値を持つインデックスを取得</p>
+                <p>*max_element(vec.begin(), vec.end()) ...配列変数vecの最大値を取得</p>
+                <p>accumulate(vec.begin(), vec.end(), 0 (or 0LL)) ...総和を計算</p>
+                <p>vector<int> v = {1,2,3,4};<br>
+                        do{<br>
+                        for(int i = 0; i < v.size(); i++){<br>
+                            cout << v[i]; <br>
+                            if(i != 3) cout << " "; <br>
+                        }<br>
+                        cout << endl; <br>
+                    }while(next_permutation(v.begin(), v.end())); <br>
+                    return 0;  ...順列の列挙。vがソートされている必要がある。またv.begin()+1などとすると先頭固定で後ろで順列などもできる</p>
+                <p>降順の順列が欲しかったら、prev_permutationを使うといい</p>
+                <p>vector<pair<int, int>> vp;
+                    rep(i, N) {
+                        int k;
+                        cin >> k;
+                        vp.pb({k, i});
+                    } ...keyとvalueで持ちたいときに使える。最初の要素でソートも可能</p>
+                <p>vpii で前昇順、後ろ降順でソートしたいときは、降順の方を-1倍してソートする</p>
+            </section>
+            <section id="set">
+                <h3>set</h3>
+                <p>set&lt型&gt 変数名; ...宣言</p>
+                <p>変数.insert(値) ...setに要素を追加 (O(logN))</p>
+                <p>変数.count(値) ...要素の存在確認 (O(logN))</p>
+                <p>変数.erase(値) ...要素の削除 (O(logN))</p>
+                <p>変数.size() ...要素数の取得 (O(1))</p>
+                <p>a.lower_bound(x) ...集合 a の中で x 以上である最小の要素を指すイテレーターを返す</p>	
+                <p>*begin(変数) ...最小値の取得 (O(1))</p>
+                <p>*rbegin(変数) ...最大値の取得 (O(1))</p>
+                <p>st.find(x) != st.end() ...stの中にxと等価な数値があるかを判定する。あればそのイテレータを返し、無ければend()を返す</p>
+                <p>set&ltll&gt B(all(A)) ...vectorからsetに変換</p>
+            </section>
+            <section id="map">
+                <h3>map</h3>
+                <p>map&ltkeyの型, Valueの型&gt 変数名; ...宣言</p>
+                <p>変数[key] = value; ...値の追加 (O(logN))</p>
+                <p>変数.erase(key); ...値の削除 (O(logN))</p>
+                <p>変数[key] ...値の参照 (O(logN))</p>
+                <p>変数.count(key) ...存在確認 O(logN)</p>
+                <p>for (auto p : 変数名) {
+                    auto key = p.first;
+                    auto value = p.second;
+                    }</p>
+                <p>for (auto x : mp) if (x.second > max) max = x.second; ...最大値探し</p>
+            </section>
+            <section id="num">
+                <h3>数値型</h3>
+                <p>int型 ...16bit(10^9)を超えるとオーバーフローする</p>
+                <p>long long型 ...64bit以上の値を保持できる</p>
+                <p>double型 ...途中の桁まで四捨五入せずに確実に表示したい場合、cout << fixed << setprecision(桁数)と書く;</p>
+                <p>数値型から文字列に変換するには、to_string関数を用いる</p>
+                <p>文字列からint型に変換するには、stoi関数を用いる</p>
+                <p>文字列からlong long型に変換するには、stoll関数を用いる</p>
+                <p>文字列からdouble型に変換するには、stod関数を用いる</p>
+                <p>stringstream str_oct;
+                    str_oct << oct << stoi(str_i);
+                    string s = str_oct.str(); ...十進法から八進法への変換</p>
+                <p>int i = c - '0'; ...charから数値型への変換</p>
+                <p>temp == floor(temp) double型が整数かどうかの確認</p>
+            </section>
+            <section id="string">
+                <h3>文字列型</h3>
+                <p>S.find(T) != string::npos ?
+                    cout << "Yes" << endl :
+                    cout << "No" << endl; ...文字列Sの中の部分文字列Tの検索</p>
+                <p>S.substr(開始位置, 取り出す長さ(省略可能)); ...文字列Sの部分文字列の抽出</p>
+                <p>string a = b + c ...新規の文字列に連結</p>
+                <p>a += b, a.append("b"), a.push_back('b'), a.insert(位置,'b') ...既存の文字列に連結</p>
+                <p>n個連続させたいときはfor文を使うのが良さそう</p>
+                <p>islower(char) ...char型小文字判定</p>
+                <p>char('a' + m) ...mの値でアルファベットを調整</p>
+                <p>char C; C++; ...次の文字に変換（a -> b）</p>
+                <p>sort(all(S)) ...文字列のソート ("cba" -> "abc")</p>
+                <p>S[K-1] += 'a' - 'A'; ...大文字から小文字に変換。実際には32を足している。逆は演算を逆にすればよい。</p>
+                <p>string(5, 'a') ...同じ文字を繰り返してstringを作る</p>
+            </section>
+            <section id="stack">
+                <h3>stack</h3>
+                <p>実質的にはvectorの下位互換</p>
+                <p>stack< int > a; ...宣言</p>
+                <p>a.push(x) ...stackの一番上に要素を追加 (O(1))</p>
+                <p>a.pop() ...stackの一番上の要素を取り除く (O(1))</p>
+                <p>a.top() ...stackの一番上の要素を返す (O(1))</p>
+                <p>a.size() ...要素数の取得 (O(1))</p>
+                <p>a.empty() ...要素数がゼロならtrue, そうでないならfalse</p>
+            </section>
+            <section id="queue">
+                <h3>queue</h3>
+                <p>幅優先探索や最短経路探索で使える</p>
+                <p>queue< int > a; ...宣言</p>
+                <p>a.push(x) ...queueの最後尾に要素を追加 (O(1))</p>
+                <p>a.pop() ...queueの一番前の要素を取り除く (O(1))</p>
+                <p>a.front() ...queueの一番前の要素を返す (O(1))</p>
+                <p>a.size() ...要素数の取得 (O(1))</p>
+                <p>a.empty() ...要素数がゼロならtrue, そうでないならfalse</p>
+            </section>
+            <section id="priority_queue">
+                <h3>priority_queue</h3>
+                <p>priority_queue<int, vector<int>, greater<int>> Q1; ...int 型の要素を持ち、最も小さい値を取り出す形の priority_queue を定義する場合</p>
+                <p>priority_queue<int, vector<int>, less<int>> Q3;; ...int 型の要素を持ち、最も大きい値を取り出す形の priority_queue を定義する場合</p>
+                <p>a.push(x) ...要素を追加 (O(logN))</p>
+                <p>a.pop() ...一番小さいの要素を取り除く (O(logN))</p>
+                <p>a.top() ...一番小さい要素を返す (O(logN))</p>
+                <p>a.size() ...要素数の取得 (O(1))</p>
+                <p>a.empty() ...要素数がゼロならtrue, そうでないならfalse</p>
+            </section>
+            <section id="lower_bound">
+                <h3>lower_bound</h3>
+                <p>sort済みの配列に対し、二分探索(O(logN))ができる関数</p>
+                <p>lower_bound(a, a+N, x) - a ...配列aの中で初めて x 以上となるようなインデックスを返す</p>
+                <p></p>
+            </section>
+        </section>
+
+        <section id="bis">
+            <h2>二分探索</h2>
+            <ul>
+                <li><a href=https://atcoder.jp/contests/typical90/tasks/typical90_g>007 CP Classes</a></li>        
+            </ul>
+            <p>計算量 O(logN)</p>
+            <p>ソートした配列のどこに挿入するかを考えたいときに使う</p>
+        </section>
+
+        <section id="dp">
+            <h2>動的計画法</h2>
+            <ul>
+                <li><a href=https://atcoder.jp/contests/abc240/tasks/abc240_c>240 Jumping Takahashi</a></li>
+                <li><a href=https://atcoder.jp/contests/abc242/tasks/abc242_c>242 1111gal password</a></li>
+                <li><a href=https://atcoder.jp/contests/abc245/tasks/abc245_c>245 Choose Elements</a></li>
+                <li><a href=https://atcoder.jp/contests/abc248/tasks/abc248_c>248 Dice Sum</a></li>
+                
+            </ul>
+            <p>漸化式を立てれそうな問題に使える</p>
+            <p>dp = [[0 for _ in range(列数)] for _ in range(行数)] で初期化</p>
+            <p>dp_a, dp_b(どちらも一次元配列)のように二つのdpを組み合わせて使うときもある(ABC245)</p>
+            <p>for文の前に、dpの一行目の適切な箇所に1を代入する必要がある</p>
+            <p>2次元dpの典型<li><a href=https://atcoder.jp/contests/tessoku-book/submissions/36026365>Subset Sum</a></li></p>
+        </section>
+
+        <section id="dict">
+            <h2>連想配列</h2>
+            <ul>
+                <li><a href=https://atcoder.jp/contests/abc243/tasks/abc243_c>243 Collision 2</a></li>
+            </ul>
+            <p>計算量オーダー O(1)</p>
+            <p>グループごとに処理したいときに使える</p>
+            <p>辞書にキーがないときのKeyErrorを回避するため、try / except KeyError continueを使うとよい</p>
+
+        </section>
+
+        <section id="bit">
+            <h2>bit全探索</h2>
+            <ul>
+                <li><a href=https://atcoder.jp/contests/abc249/tasks/abc249_c>249 Just K</a></li>
+            </ul>
+            <p>計算量 O(2^N)</p>
+            <p>ありえる組み合わせをすべて試す全探索の一種。「ありえる組み合わせすべて」を列挙できれば、あとはただの全探索と違いは無し。</p>
+            <p>特に「選ぶ、選ばない」といった2^N通り(N≦20)の全探索を考えるときに使うと良い手法</p>
+            <p> 1 << N は 2^Nと同じ</p>
+
+        </section>
+
+        <section id="bfs">
+            <h2>幅優先探索</h2>
+            <ul>
+                <li><a href=https://atcoder.jp/contests/abc204/tasks/abc204_c>204 Tour</a></li>
+            </ul>
+            <p>計算量はN個の頂点からM本の辺を調べる時、O(N+M)</p>
+            <p>グラフや木構造を探索するアルゴリズムで、探索を開始した点から近い順に探索していく方法</p>                
+            <h3>重要</h3>
+            <h4>1. 頂点を探索したかどうかの管理</h4>
+            <h4>2. 探索予定の頂点を格納する配列</h4>
+        </section>
+
+    </body>
+</html>
