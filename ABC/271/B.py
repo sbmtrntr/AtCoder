@@ -8,4 +8,3 @@ for i in range(N):
 for i in range(Q):
     s, t = map(int, input().split())
     print(A[s-1][t])
-
