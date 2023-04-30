@@ -22,12 +22,16 @@ for i in range(3*10**5):
 
 ans = 0
 
-for i in range(len(prime_list)):
-    k = len(prime_list) - 1
-    j = i+1
-    while j < k:
-        num = prime_list[i]**2 * prime_list[j] * prime_list[k]**2
-        if num > N:
-            k -= 1
+for i in range(len(prime_list)-2):
+    if prime_list[i]**2 * prime_list[i+1] * prime_list[i+2]**2 > N:
+        break
+    for j in range(i+1, len(prime_list)-1):
+        if prime_list[i]**2 * prime_list[j] * prime_list[j+1]**2 > N:
+            break
+        for k in range(j+1, len(prime_list)):
+            if prime_list[i]**2 * prime_list[j] * prime_list[k]**2 <= N:
+                ans += 1
+            else:
+                break
 
 print(ans)
