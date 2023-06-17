@@ -2,17 +2,37 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < N; i++)
 using ll = long long;
+
+int N, K, Q;
+ll x, y, ans = 0;
+vector<int> A(N);
+multiset<int> X;
+multiset<int> Y;
+
+void balance() {
+    while(X.size() < K) {
+    }
+}
+
+void add(ll v) {
+
+}
+
+void erase(ll v) {
+
+}
+
 int main(){
-    int N, K, Q, x, y;
     cin >> N >> K >> Q;
-    vector<int> A(N);
-    set<int> B;
-    rep(i, K) B.insert(0);
+    rep(i, K) X.insert(0);
+    rep(i, N - K) Y.insert(0);
     rep(i, Q) {
         cin >> x >> y;
-        B.erase(A[x-1]);
-        B.insert(y);
-        A[x-1] = y;
+        x--;
+        add(y);
+        erase(A[x]);
+        A[x] = y;
+        cout << ans << endl;
     }
     return 0;
 }
