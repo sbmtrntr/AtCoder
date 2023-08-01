@@ -1,3 +1,6 @@
+from collections import deque, defaultdict
+graph = defaultdict(list)
+
 def bfs(u, hoge):
     queue = deque([u])
     d = [-1] * (hoge+1) # uからの距離の初期化
