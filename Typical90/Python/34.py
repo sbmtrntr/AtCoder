@@ -1,22 +1,24 @@
-from collections import deque
+from collections import defaultdict
 N, K = map(int, input().split())
 A = list(map(int, input().split()))
-elements = set()
-queue = deque([])
-ans = 0
-temp = 0
 
-for i in range(N):
-    if N[i] in elements:
-        temp += 1
+cnt = defaultdict(int)
+
+l = -1
+r = -1
+ans = 0
+
+while l < N:
+    if len(cnt) <= K and r < N:
+        ans = max(ans, r-l)
+        r += 1
+        if r < N:
+            cnt[A[r]] += 1
     else:
-        if len(elements) < K:
-            temp += 1
-            elements.add()
-            queue.append(N[i])
-        else:
-            queue.popleft()
-            ans = max(ans, temp)
-            temp = 0
+        l += 1
+        if l < N:
+            cnt[A[l]] -= 1
+            if cnt[A[l]] == 0:
+                cnt.pop(A[l])
 
 print(ans)
