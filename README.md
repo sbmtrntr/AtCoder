@@ -16,8 +16,10 @@ https://atcoder.jp/users/shibarin
 
 ### データ構造
 * set
-* dictionary(連想配列)
+* dictionary
+* stack
 * queue
+* priority-queue
 * 有向/無向グラフ
 
 ## 知ってはいるけど理解していないこと
@@ -30,4 +32,3 @@ https://atcoder.jp/users/shibarin
 
 ### データ構造
 * Union-Find
-* priority-queue

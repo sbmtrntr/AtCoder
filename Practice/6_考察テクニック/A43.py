@@ -6,13 +6,12 @@ for i in range(N):
     A.append(a)
     B.append(b)
 
-mid = L // 2
 ans = 0
 
 for i in range(N):
     if B[i] == "E":
         ans = max(ans, L - A[i])
     else:
-        ans = max(ans, L - A[i] + mid)
+        ans = max(ans, A[i])
 
 print(ans)
