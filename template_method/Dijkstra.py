@@ -40,9 +40,3 @@ for _ in range(M):
 
 start = 0
 distance = dijkstra(graph, start)
-
-for i in range(N):
-    if distance[i] == 10**10:
-        print(-1)
-    else:
-        print(distance[i])

@@ -4,27 +4,25 @@ from collections import defaultdict
 def dijkstra(graph, start):
     # 初期化
     visited = [False] * N
-    distance = [10**10] * N
-    distance[start] = 0
-    pq = [(0, start)]
+    distance = [[10**10, 0]] * N
+    distance[start] = [0, 0]
+    pq = [(0, 0, 0)] # 距離, -(木の数), ノード番号
 
     # ダイクストラ法
     while pq:
         # 未処理の中で最小の距離を持つ頂点を取り出す
-        dist, u = heapq.heappop(pq)
+        dist, tree, u = heapq.heappop(pq)
         if visited[u]:
             continue
 
         # 訪問済みにする
         visited[u] = True
+        distance[u] = [dist, tree]
 
         # uから到達可能な頂点の距離を更新する
-        for v, weight in graph[u]:
+        for v, w, tr in graph[u]:
             if not visited[v]:
-                new_distance = distance[u] + weight
-                if new_distance < distance[v]:
-                    distance[v] = new_distance
-                    heapq.heappush(pq, (new_distance, v))
+                heapq.heappush(pq, (dist + w, tree - tr, v))
 
     return distance
 
@@ -32,17 +30,13 @@ N, M = map(int, input().split())
 graph = defaultdict(list)
 
 for _ in range(M):
-    a, b, c = map(int, input().split())
+    a, b, c, d = map(int, input().split())
     a -= 1
     b -= 1
-    graph[a].append((b, c))
-    graph[b].append((a, c))
+    graph[a].append((b, c, d))
+    graph[b].append((a, c, d))
 
 start = 0
 distance = dijkstra(graph, start)
 
-for i in range(N):
-    if distance[i] == 10**10:
-        print(-1)
-    else:
-        print(distance[i])
+print(distance[-1][0], -distance[-1][1])
