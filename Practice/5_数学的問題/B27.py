@@ -1,9 +1,9 @@
 A, B = map(int,input().split())
 
 def gcd(a, b):
-    if a % b == 1:
+    if a % b == 0:
         return b
-    return gcd(b, a // b)
+    return gcd(b, a % b)
 
 if B > A:
     A, B = B, A
