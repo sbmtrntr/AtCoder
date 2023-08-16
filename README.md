@@ -15,6 +15,8 @@ https://atcoder.jp/users/shibarin
 * 累積和
 * クラスカル法
 * ダイクストラ法
+* 尺取り法
+* imos法
 
 ### データ構造
 * set
@@ -31,6 +33,7 @@ https://atcoder.jp/users/shibarin
 * ワーシャルフロイド法
 * トポロジカルソート
 * 転倒数
+* 期待値DP
 
 ### データ構造
 * 今のところなし
