@@ -7,7 +7,7 @@ for _ in range(N-1):
 
 Q = int(input())
 
-memo = [0]*8
+memo = [0]*840
 for i in range(8):
     for j in range(N):
         memo
